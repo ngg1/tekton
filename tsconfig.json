@@ -1,0 +1,26 @@
+{
+  "compileOnSave": true,
+
+  "include": ["src"],
+
+  "exclude": ["node_modules", "**/*.spec.ts"],
+
+  "compilerOptions": {
+    "outDir": "dist",
+
+    "target": "ES2020",
+    "module": "commonjs",
+    "moduleResolution": "node",
+
+    "allowJs": true,
+    "noImplicitAny": false,
+    "strict": true,
+    "strictNullChecks": true,
+    "removeComments": true,
+    "preserveConstEnums": true,
+    "sourceMap": true,
+
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true
+  }
+}
