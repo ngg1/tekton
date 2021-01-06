@@ -1,4 +1,4 @@
-// Queue class 
+// Queue class
 export class Queue {
   data;
 
@@ -15,26 +15,24 @@ export class Queue {
   enqueue(item) {
     this.data.push(item);
   }
-  // removing element from the queue 
+  // removing element from the queue
   dequeue() {
-    if (this.isEmpty()) 
-      throw new Error("Q is empty");
-    
+    if (this.isEmpty()) throw new Error("Q is empty");
+
     return this.data.shift();
   }
 
   front() {
-    // returns the Front element of  
-    // the queue without removing it. 
-    if (this.isEmpty())
-      throw new Error("Q is empty");
+    // returns the Front element of
+    // the queue without removing it.
+    if (this.isEmpty()) throw new Error("Q is empty");
 
     return this.data[0];
   }
 
-  // isEmpty function 
+  // isEmpty function
   isEmpty() {
-    // return true if the queue is empty. 
+    // return true if the queue is empty.
     return this.size === 0;
   }
 }

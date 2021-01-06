@@ -1,7 +1,7 @@
 {
   "name": "tekton",
-  "version": "0.0.0",
-  "description": "",
+  "version": "0.0.2",
+  "description": ":hibiscus: miscellaneous tools",
   "main": "bin/cli",
   "directories": {
     "test": "tests"
@@ -10,7 +10,7 @@
   "scripts": {
     "make": "npm run clean && npm i && npm run build && npm run test",
     "start": "bin/cli",
-    "build": "npm run compile",
+    "build": "prettier -w ./src && npm run compile",
     "test": "npm run compile && jest --forceExit --coverage --verbose",
     "compile": "tsc",
     "compile:w": "tsc -w",
@@ -20,9 +20,21 @@
   "license": "ISC",
   "dependencies": {
     "globby": "^11.0.1",
+    "update-notifier": "^5.0.1",
     "yargs": "^16.2.0"
   },
   "devDependencies": {
-    "@types/node": "^14.14.20"
-  }
+    "@types/jest": "^26.0.19",
+    "@types/node": "^14.14.20",
+    "jest": "^26.6.3",
+    "prettier": "^2.2.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/m1losz/tekton.git"
+  },
+  "bugs": {
+    "url": "https://github.com/m1losz/tekton/issues"
+  },
+  "homepage": "https://github.com/m1losz/tekton#readme"
 }
