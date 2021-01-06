@@ -1,6 +1,6 @@
 {
   "name": "tekton",
-  "version": "0.0.2",
+  "version": "1.0.0",
   "description": ":hibiscus: miscellaneous tools",
   "main": "bin/cli",
   "directories": {
