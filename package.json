@@ -1,17 +1,12 @@
 {
   "name": "tekton",
-  "version": "0.0.1",
+  "version": "0.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "bin/cli",
   "directories": {
     "test": "tests"
   },
-  "main": "bin/cli",
   "bin": "bin/cli",
-  "scripts": {
-    "start": "bin/cli",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "scripts": {
     "make": "npm run clean && npm i && npm run build && npm run test",
     "start": "bin/cli",
