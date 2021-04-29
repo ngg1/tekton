@@ -51,9 +51,17 @@ export function readPkg(path: string) {
 }
 
 export function shorttenArr(arr) {
-  for (let i = 0; i < arr.length; ++i) {
-    for (let y = 0; y < arr[i].length; ++y) {
-      arr[i][y] = arr[i][y].name + ":" + arr[i][y].path;
+  if (arr.length === 0) return arr;
+
+  if (arr[0].constructor === Array) {
+    for (let i = 0; i < arr.length; ++i) {
+      for (let y = 0; y < arr[i].length; ++y) {
+        arr[i][y] = arr[i][y].name + ":" + arr[i][y].path;
+      }
+    }
+  } else {
+    for (let i = 0; i < arr.length; ++i) {
+      arr[i] = arr[i].name + ":" + arr[i].path;
     }
   }
 }
@@ -101,6 +109,11 @@ export function writeFileSync(file, ...args) {
   log(`writing out to ${file}...`);
 
   return fs.writeFileSync.call(fs, path.posix.resolve(file), ...args);
+}
+
+export function safeArrayFrom(res) {
+  if (res === undefined) return [];
+  return Array.from(res);
 }
 
 let LOG_LEVEL = 0;

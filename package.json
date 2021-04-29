@@ -11,7 +11,7 @@
     "make": "npm run clean && npm i && npm run build && npm run test",
     "start": "bin/cli",
     "build": "prettier -w ./src && npm run compile",
-    "test": "npm run compile && jest --forceExit --coverage --verbose",
+    "test": "npm run compile && jest --coverage --verbose",
     "compile": "tsc",
     "compile:w": "tsc -w",
     "clean": "rm -rf dist/ && rm -rf node_modules/ && rm -rf logs/ && rm -rf coverage/"

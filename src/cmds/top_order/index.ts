@@ -15,7 +15,7 @@ export { command, aliases, describe, builder, handler, deprecated };
 // string (or array of strings) that executes this command when given on the command line, first string may contain positional args
 const command = "top-order [dirs..]";
 // array of strings (or a single string) representing aliases of exports.command, positional args defined in an alias are ignored
-const aliases = ["dep [dirs..]", "deptree [dirs..]", "torder [dirs..]"];
+const aliases = ["deptree [dirs..]", "torder [dirs..]"];
 //string used as the description for the command in help text, use false for a hidden command
 const describe = "generate the topological order from dependencies chain";
 //object declaring the options the command accepts, or a function accepting and returning a yargs instance
@@ -76,4 +76,6 @@ const handler = async (opts) => {
   }
 
   loggy.log(output);
+
+  return output;
 };
