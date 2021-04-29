@@ -1,14 +1,4 @@
-import {
-  NodeSelector,
-  buildGraph,
-  shorttenArr,
-  getPaths,
-  Logger,
-  writeFileSync,
-} from "../../lib/utils";
-
-const path = require("path");
-
+import { shorttenArr, Logger, writeFileSync } from "../../lib/utils";
 //
 export { command, aliases, describe, builder, handler, deprecated };
 // string (or array of strings) that executes this command when given on the command line, first string may contain positional args
@@ -50,20 +40,9 @@ const builder = (yargs) => {
 const deprecated = false; // a boolean (or string) to show deprecation notice.
 //// a function which will be passed the parsed argv.
 const handler = async (opts) => {
-  let { mod, dirs, prefixes, ignore } = opts;
   let loggy = Logger();
 
-  loggy.info("looking up modules under", dirs);
-  loggy.info(`prefixes=${prefixes}`);
-  loggy.info(`ignore=${ignore}`);
-
-  let paths = await getPaths(dirs, ignore);
-
-  let G = buildGraph(paths, NodeSelector(prefixes));
-
-  G.print();
-
-  let res = G.dependenciesOf(mod);
+  let res = opts.graph.dependenciesOf(opts.mod);
 
   !opts.fullOutput && shorttenArr(res);
 

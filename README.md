@@ -22,4 +22,4 @@ Options:
       --full-output  Show full output                 [boolean] [default: false]
       --out-path     out put path             [string] [default: "./output.txt"]
   -o, --out          out to file?                     [boolean] [default: false]
-  ```
+```
