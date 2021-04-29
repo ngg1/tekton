@@ -4,8 +4,8 @@ const { exec } = require("child_process");
 it("must return correct output", (done) => {
   exec("node ./bin/cli top-order", "utf8", (err, stdout, stderr) => {
     let out = JSON.parse(stdout);
-    for(let i = 0; i < out.length; i++) {
-      for(let y = 0; y < out[i].length; y++) {
+    for (let i = 0; i < out.length; i++) {
+      for (let y = 0; y < out[i].length; y++) {
         out[i][y] = out[i][y].split(":")[0];
       }
     }
@@ -17,6 +17,9 @@ it("must return correct output", (done) => {
     ]);
     done();
   });
+});
+
+it("must return correct short output", (done) => {
   exec("node ./bin/cli top-order -s", "utf8", (err, stdout, stderr) => {
     let out = JSON.parse(stdout);
     out = out.map((p) => p.split(":")[0]);
@@ -43,16 +46,11 @@ it("must able to detect cycles", (done) => {
   });
 });
 
-// it("must have help menu", async () => {
-//   // Run the command module with --help as argument
-//   const output = await new Promise((resolve) => {
-//     parser.parse("--help", (err, argv, output) => {
-//       resolve(output);
-//     })
-//   });
-
-//   // Verify the output is correct
-//   expect(output).toBeDefined();
-//   expect((output.length > 120)).toBe(true);
-
-// });
+it("must have help menu", async () => {
+  // Run the command module with --help as argument
+  const output = await new Promise((resolve) => {
+    parser.parse("--help", (err, argv, output) => {
+      resolve(output);
+    })
+  });
+});

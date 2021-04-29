@@ -1,5 +1,5 @@
 import { Queue } from "./";
-import { Logger } from "./utils";
+import { Logger, safeArrayFrom } from "./utils";
 
 export class DGraph {
   private _nodes: Map<string, Node> = new Map();
@@ -148,8 +148,16 @@ export class DGraph {
     return false;
   }
 
-  dependenciesOf(node: Node | string, opts: {} = {}) {}
-  dependantsOf(node: Node | string, opts: {} = {}) {}
+  dependenciesOf(node: Node | string, opts: {} = {}) {
+    let mod = this.getNode(node);
+
+    return safeArrayFrom(this._inEdges.get(mod));
+  }
+  dependantsOf(node: Node | string, opts: {} = {}) {
+    let mod = this.getNode(node);
+
+    return safeArrayFrom(this._outEdges.get(mod));
+  }
   /**
    * [overallOrder description]
    * @param {[type]} leavesOnly=false [description]
@@ -182,6 +190,7 @@ export class DGraph {
     }
     return top_orders;
   }
+  //
   private _bfs(seen, Q, _visit, top_orders) {
     let currNode;
     let curr_order: Node[] = [];
