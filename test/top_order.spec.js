@@ -45,12 +45,3 @@ it("must able to detect cycles", (done) => {
     done();
   });
 });
-
-it("must have help menu", async () => {
-  // Run the command module with --help as argument
-  const output = await new Promise((resolve) => {
-    parser.parse("--help", (err, argv, output) => {
-      resolve(output);
-    })
-  });
-});
