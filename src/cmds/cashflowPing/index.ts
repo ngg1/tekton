@@ -33,6 +33,7 @@ const handler = async () => {
       socket.emit("PING");
     })
     .on("PONG", function () {
+      socket.off();
       let res = "Successfully pinged cashflow server.";
       disconnectAndLogResult(socket, res);
     })
