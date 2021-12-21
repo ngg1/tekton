@@ -24,8 +24,7 @@ const handler = async () => {
 
   function disconnectAndLogResult(socket, res) {
     socket.close();
-    let output = JSON.stringify(res, null, 2);
-    loggy.log(output);
+    loggy.log(res);
   }
 
   socket
