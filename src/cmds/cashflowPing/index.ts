@@ -32,8 +32,8 @@ const handler = async () => {
       socket.emit("PING");
     })
     .on("PONG", function () {
-      socket.off();
       let res = "Successfully pinged cashflow server.";
+      socket.off();
       disconnectAndLogResult(socket, res);
     })
     .on("connect_error", function (err) {
