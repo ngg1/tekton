@@ -16,7 +16,7 @@ it("must ping all hosts", (done) => {
     (err, stdout, stderr) => {
       let hosts = [
         "https://websocket.sfportal.com/",
-        "ws://websocketstest.com/service/",
+        "ws://ws.ifelse.io/",
       ];
       hosts.forEach((host) => {
         expect(stdout).toMatch("Successfully pinged ${host}.");

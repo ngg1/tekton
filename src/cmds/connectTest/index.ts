@@ -25,7 +25,7 @@ const handler = async () => {
       type: SocketType.SOCKETIO,
     },
     {
-      url: "ws://websocketstest.com/service/",
+      url: "ws://ws.ifelse.io/",
       type: SocketType.WS,
     },
   ];
@@ -76,30 +76,29 @@ const handler = async () => {
     let socket = new WebSocket(url);
     socket
       .on("open", function () {
-        socket.emit("ping");
+        socket.send("echo");
       })
-      .on("pong", function () {
-        let res = `Successfully pinged ${url}.`;
-        socket.off();
-        disconnectAndLogResult(socket, res);
+      .on("message", function (data, isBinary) {
+        if (data.toString() === "echo") {
+          let res = `Successfully pinged ${url}.`;
+          disconnectAndLogResult(socket, res);
+        }
       })
       .on("close", function (code, reason) {
-        let res = `Disconnected from ${url} ${
-          code !== undefined || reason !== undefined
-            ? `due to ${code} ${reason}`
-            : ""
-        }.`;
-        disconnectAndLogResult(socket, res);
+        if (code !== 1000) {
+          // 1000 is expected, don't log error
+          let res = `Disconnected from ${url} ${
+            code !== undefined || reason !== undefined
+              ? `due to ${code} ${reason}`
+              : ""
+          }.`;
+          disconnectAndLogResult(socket, res);
+        }
       })
       .on("error", function (err) {
-        let res = `${url} error ${JSON.stringify(err)}.`;
+        let res = `${url} error ${JSON.stringify(err, null, 2)}.`;
         disconnectAndLogResult(socket, res);
       });
-
-    socket.onerror = (errorEvent) => {
-      let res = `${url} error event ${JSON.stringify(errorEvent)}.`;
-      disconnectAndLogResult(socket, res);
-    };
   }
 
   hosts.forEach((host) => {
