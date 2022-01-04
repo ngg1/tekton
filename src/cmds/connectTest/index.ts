@@ -28,6 +28,14 @@ const handler = async () => {
       url: "ws://ws.ifelse.io/",
       type: SocketType.WS,
     },
+    {
+      url: "wss://ws.ifelse.io/",
+      type: SocketType.WS,
+    },
+    {
+      url: "wss://ws-echo-server.x1111.xyz/",
+      type: SocketType.WS,
+    },
   ];
 
   function disconnectAndLogResult(socket, res) {
