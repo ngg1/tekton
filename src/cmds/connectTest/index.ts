@@ -44,13 +44,15 @@ const handler = async () => {
       // "query": "x-auth-token=" + my.token, //permissioning on handshake
       transports: ["websocket", "xhr-polling"], //force websocket by default, work on > IE10
     });
-
+    let startTime, latency;
     socket
       .on("connect", function () {
+        startTime = Date.now();
         socket.emit("PING");
       })
       .on("PONG", function () {
-        let res = `Successfully pinged ${url}.`;
+        latency = Date.now() - startTime;
+        let res = `Successfully pinged ${url}. ${latency}ms`;
         socket.off();
         disconnectAndLogResult(socket, res);
       })
@@ -73,19 +75,23 @@ const handler = async () => {
   }
 
   function openWsSocket(url) {
+    let startTime, latency;
     let socket = new WebSocket(url);
     socket
       .on("open", function () {
+        startTime = Date.now();
         socket.send("echo");
       })
       .on("message", function (data, isBinary) {
         if (data.toString() === "echo") {
-          let res = `Successfully pinged ${url}.`;
+          latency = Date.now() - startTime;
+          let res = `Successfully pinged ${url}. ${latency}ms`;
           disconnectAndLogResult(socket, res);
         }
       })
       .on("close", function (code, reason) {
-        if (code !== 1000) {
+        //0,1 open states, 2,3 already closed
+        if (socket.readyState < 2 && code !== 1000) {
           // 1000 is expected, don't log error
           let res = `Disconnected from ${url} ${
             code !== undefined || reason !== undefined
